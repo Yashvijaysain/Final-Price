@@ -1,4 +1,4 @@
-const CACHE_NAME = 'final-price-v10';
+const CACHE_NAME = 'final-price-v11';
 const ASSETS = [
   './',
   './index.html',

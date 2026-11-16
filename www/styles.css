@@ -97,7 +97,7 @@ h1 em { color: var(--forest-2); font-style: normal; }
 .input-unit small { flex: 0 0 auto; color: var(--muted); font-size: 10px; }
 .rate-list .calculated { margin-top: 14px; }
 
-.print-brand-header { display: none; }
+.print-brand-header, .print-unit-details { display: none; }
 .logo-upload {
   display: flex;
   align-items: center;
@@ -180,6 +180,17 @@ h1 em { color: var(--forest-2); font-style: normal; }
   object-position: center 62%;
 }
 .pdf-capture .print-company-identity strong { font: 700 10pt Manrope, sans-serif; color: #000; text-align: left; white-space: nowrap; }
+.pdf-capture .print-unit-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  margin-bottom: 4mm;
+  border: 1px solid #000;
+}
+.pdf-capture .print-unit-details > div { padding: 2.5mm 4mm; border-right: 1px solid #000; }
+.pdf-capture .print-unit-details > div:last-child { border-right: 0; }
+.pdf-capture .print-unit-details span { display: block; margin-bottom: 1mm; color: #444; font-size: 5.8pt; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.pdf-capture .print-unit-details strong { display: block; color: #000; font: 700 10pt Manrope, sans-serif; }
 .pdf-capture .summary-card {
   position: static;
   width: 100%;
@@ -269,6 +280,17 @@ h1 em { color: var(--forest-2); font-style: normal; }
     object-position: center 62%;
   }
   .print-company-identity strong { font: 700 10pt Manrope, sans-serif; color: #000; text-align: left; white-space: nowrap; }
+  .print-unit-details {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    margin-bottom: 4mm;
+    border: 1px solid #000;
+  }
+  .print-unit-details > div { padding: 2.5mm 4mm; border-right: 1px solid #000; }
+  .print-unit-details > div:last-child { border-right: 0; }
+  .print-unit-details span { display: block; margin-bottom: 1mm; color: #444; font-size: 5.8pt; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .print-unit-details strong { display: block; color: #000; font: 700 10pt Manrope, sans-serif; }
   .intro { align-items: center; gap: 5mm; margin-bottom: 4mm; break-inside: avoid; }
   .intro .eyebrow { margin-bottom: 1.5mm; font-size: 7pt; }
   h1 { font-size: 22pt; line-height: 1; }

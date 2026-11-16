@@ -163,6 +163,7 @@
     capture.className = 'pdf-capture';
     capture.append(
       cloneForPdf($('printBrandHeader')),
+      cloneForPdf($('printUnitDetails')),
       cloneForPdf(document.querySelector('.summary-card'))
     );
     document.body.append(capture);
@@ -211,6 +212,9 @@
     setText('selectionSummary', `Tower ${values.tower || '—'} · ${values.floor || '—'} floor`);
     setText('areaSummary', `${formatNumber(totals.area)} sq.ft. · ${values.propertyType || '—'}`);
     setText('paymentPlanSummary', `${values.paymentPlan || 'Custom'} plan`);
+    setText('printTower', values.tower || '—');
+    setText('printUnitNumber', values.flatNo || '—');
+    setText('printFloor', values.floor || '—');
 
     setText('basicCostInput', formatINR(totals.basicCost));
     setText('basicCost', formatINR(totals.basicCost));
