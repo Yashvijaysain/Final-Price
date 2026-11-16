@@ -1,0 +1,13 @@
+{
+  "appId": "com.ngrealty.finalprice",
+  "appName": "Final Price",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "backgroundColor": "#12161A",
+  "android": {
+    "backgroundColor": "#12161A"
+  },
+  "ios": {
+    "backgroundColor": "#12161A"
+  }
+}

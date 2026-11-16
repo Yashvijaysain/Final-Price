@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12372a">
+  <meta name="description" content="Interactive flat cost sheet and final price calculator.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Final Price · Cost Sheet</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Final Price home">
+      <img src="icons/icon-192.png" alt="" width="44" height="44">
+      <span><strong>Final Price</strong><small>Property cost studio</small></span>
+    </a>
+    <div class="top-actions">
+      <button class="button ghost" id="resetButton" type="button">Reset sheet</button>
+      <button class="button primary" id="printButton" type="button">Print estimate</button>
+      <button class="button primary" id="downloadPdfButton" type="button">Download PDF</button>
+    </div>
+  </header>
+
+  <main class="page" id="top">
+    <section class="print-brand-header" id="printBrandHeader" aria-label="Project and company branding">
+      <div class="print-project-identity">
+        <img id="printProjectLogo" alt="Project logo">
+        <div>
+          <strong id="printProjectName"></strong>
+          <span id="printProjectAddress"></span>
+        </div>
+      </div>
+      <div class="print-company-identity">
+        <img id="printBrandLogo" alt="Company logo">
+        <strong id="printBrandName"></strong>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Live acquisition estimate</p>
+        <h1>Know the final price,<br><em>not just the base rate.</em></h1>
+        <p class="intro-copy">A clear, editable cost sheet for your selected home. Every charge follows the builder sheet shared on 16 November 2026.</p>
+      </div>
+      <div class="quote-chip" aria-label="Current unit">
+        <span>Current selection</span>
+        <strong id="selectionSummary">Tower B3 · 1st floor</strong>
+        <small id="areaSummary">2,304 sq.ft. · 3BHK + 4 Balcony</small>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <section class="editor" aria-label="Cost sheet inputs">
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>01</b> Property details</span><i>−</i>
+          </button>
+          <div class="panel-body details-grid">
+            <label class="field"><span>Print date</span><input id="printDate" type="date" value="2026-07-04"></label>
+            <label class="field"><span>Tower</span><input id="tower" type="text" value="B3"></label>
+            <label class="field"><span>Flat no.</span><input id="flatNo" type="text" placeholder="Enter flat number"></label>
+            <label class="field"><span>Floor</span><input id="floor" type="text" value="1st"></label>
+            <label class="field"><span>Super area <small>sq.ft.</small></span><input id="superArea" type="number" min="0" step="1" value="2304"></label>
+            <label class="field"><span>Built-up area <small>sq.ft.</small></span><input id="builtUpArea" type="number" min="0" step="1" value="1969"></label>
+            <label class="field"><span>Carpet area <small>sq.ft.</small></span><input id="carpetArea" type="number" min="0" step="1" value="1396"></label>
+            <label class="field"><span>Type</span><input id="propertyType" type="text" value="3BHK + 4 Balcony"></label>
+            <label class="field full"><span>PLC category</span><input id="plcType" type="text" value="Floor"></label>
+          </div>
+        </article>
+
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>02</b> Estimate</span><i>−</i>
+          </button>
+          <div class="panel-body details-grid">
+            <label class="field"><span>Payment plan</span><input id="paymentPlan" type="text" value="25:25:25:25"></label>
+            <label class="field"><span>Effective rate <small>₹ / sq.ft.</small></span><input id="effectiveRate" type="number" min="0" step="1" value="11500"></label>
+            <div class="calculated full"><span>Basic cost (A)</span><strong id="basicCostInput">₹2,64,96,000</strong></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>03</b> Preferential location charges</span><i>−</i>
+          </button>
+          <div class="panel-body rate-list">
+            <label class="rate-field"><span>Floor PLC</span><span class="input-unit"><b>₹</b><input id="floorPlcRate" type="number" min="0" value="250"><small>/ sq.ft.</small></span><output id="floorPlcAmount">₹5,76,000</output></label>
+            <label class="rate-field"><span>Park facing PLC</span><span class="input-unit"><b>₹</b><input id="parkFacingRate" type="number" min="0" value="0"><small>/ sq.ft.</small></span><output id="parkFacingAmount">₹0</output></label>
+            <label class="rate-field"><span>Green belt facing</span><span class="input-unit"><b>₹</b><input id="greenBeltRate" type="number" min="0" value="0"><small>/ sq.ft.</small></span><output id="greenBeltAmount">₹0</output></label>
+            <label class="rate-field"><span>Corner PLC</span><span class="input-unit"><b>₹</b><input id="cornerRate" type="number" min="0" value="0"><small>/ sq.ft.</small></span><output id="cornerAmount">₹0</output></label>
+            <label class="rate-field"><span>Park-pool facing PLC</span><span class="input-unit"><b>₹</b><input id="parkPoolRate" type="number" min="0" value="0"><small>/ sq.ft.</small></span><output id="parkPoolAmount">₹0</output></label>
+            <div class="calculated"><span>Total PLC (B)</span><strong id="totalPlcInput">₹5,76,000</strong></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>04</b> Additional charges</span><i>−</i>
+          </button>
+          <div class="panel-body details-grid">
+            <label class="field"><span>Parking 1 type</span><select id="parkingType"><option selected>Covered</option><option>Open</option><option>Basement</option><option>None</option></select></label>
+            <label class="field"><span>Parking amount <small>₹</small></span><input id="parkingAmount" type="number" min="0" value="700000"></label>
+            <label class="field"><span>One-time lease rent <small>₹ / sq.ft.</small></span><input id="leaseRate" type="number" min="0" value="80"></label>
+            <label class="field"><span>Club membership <small>₹</small></span><input id="clubMembership" type="number" min="0" value="250000"></label>
+            <label class="field"><span>Power backup <small>KVA</small></span><input id="powerKva" type="number" min="0" step="0.5" value="5"></label>
+            <label class="field"><span>Power rate <small>₹ / KVA</small></span><input id="powerRate" type="number" min="0" value="25000"></label>
+            <div class="calculated full"><span>Total additional charges (C)</span><strong id="totalAdditionalInput">₹12,59,320</strong></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>05</b> IFMS &amp; tax</span><i>−</i>
+          </button>
+          <div class="panel-body details-grid">
+            <label class="field"><span>IFMS <small>₹ / sq.ft.</small></span><input id="ifmsRate" type="number" min="0" value="50"></label>
+            <label class="field"><span>GST rate <small>% of A+B+C</small></span><input id="gstRate" type="number" min="0" step="0.1" value="5"></label>
+          </div>
+        </article>
+
+        <article class="panel">
+          <button class="panel-title" type="button" aria-expanded="true">
+            <span><b>06</b> Print branding</span><i>−</i>
+          </button>
+          <div class="panel-body details-grid">
+            <label class="field full"><span>Project name</span><input id="projectName" type="text" maxlength="100" placeholder="Enter project name"></label>
+            <label class="field full"><span>Project address</span><input id="projectAddress" type="text" maxlength="180" placeholder="Enter project address"></label>
+            <div class="logo-upload full">
+              <div class="logo-upload-copy">
+                <strong>Project logo</strong>
+                <small>Shown at the top-left of the PDF · maximum 2 MB</small>
+              </div>
+              <label class="button ghost upload-button" for="projectLogoUpload">Choose logo</label>
+              <input id="projectLogoUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+              <button class="button ghost" id="removeProjectLogoButton" type="button" hidden>Remove</button>
+              <div class="logo-preview" id="projectLogoPreview" hidden>
+                <img id="projectLogoPreviewImage" alt="Uploaded project logo preview">
+              </div>
+              <p class="upload-message" id="projectLogoUploadMessage" aria-live="polite"></p>
+            </div>
+            <label class="field full"><span>Company name</span><input id="companyName" type="text" maxlength="80" placeholder="Enter company name"></label>
+            <div class="logo-upload full">
+              <div class="logo-upload-copy">
+                <strong>Company logo</strong>
+                <small>PNG, JPG or WebP · maximum 2 MB</small>
+              </div>
+              <label class="button ghost upload-button" for="logoUpload">Choose logo</label>
+              <input id="logoUpload" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+              <button class="button ghost" id="removeLogoButton" type="button" hidden>Remove</button>
+              <div class="logo-preview" id="logoPreview" hidden>
+                <img id="logoPreviewImage" alt="Uploaded company logo preview">
+              </div>
+              <p class="upload-message" id="logoUploadMessage" aria-live="polite"></p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <aside class="summary-card" aria-label="Final cost summary">
+        <div class="summary-head">
+          <p class="eyebrow">Final price</p>
+          <div class="grand-total" id="grandTotal">₹2,98,63,086</div>
+          <p id="perSqftTotal">₹12,961 per sq.ft. all-in</p>
+        </div>
+
+        <div class="summary-section">
+          <div class="summary-title"><span>Estimate</span><small id="paymentPlanSummary">25:25:25:25 plan</small></div>
+          <div class="summary-row"><span>Basic cost (A)</span><strong id="basicCost">₹2,64,96,000</strong></div>
+        </div>
+
+        <div class="summary-section">
+          <div class="summary-title"><span>Preferential charges</span><small>Area based</small></div>
+          <div id="plcRows"></div>
+          <div class="summary-row subtotal"><span>Total PLC (B)</span><strong id="totalPlc">₹5,76,000</strong></div>
+        </div>
+
+        <div class="summary-section">
+          <div class="summary-title"><span>Additional charges</span><small>Builder charges</small></div>
+          <div class="summary-row"><span id="parkingLabel">Parking 1 · Covered</span><strong id="parkingCost">₹7,00,000</strong></div>
+          <div class="summary-row"><span>One-time lease rent <small id="leaseNote">₹80 × 2,304</small></span><strong id="leaseCost">₹1,84,320</strong></div>
+          <div class="summary-row"><span>Club membership</span><strong id="clubCost">₹2,50,000</strong></div>
+          <div class="summary-row"><span>Power backup <small id="powerNote">5 KVA × ₹25,000</small></span><strong id="powerCost">₹1,25,000</strong></div>
+          <div class="summary-row subtotal"><span>Total additional (C)</span><strong id="totalAdditional">₹12,59,320</strong></div>
+        </div>
+
+        <div class="summary-section emphasis">
+          <div class="summary-row"><span>Sales consideration <small>A + B + C</small></span><strong id="salesConsideration">₹2,83,31,320</strong></div>
+          <div class="summary-row"><span>IFMS <small id="ifmsNote">₹50 × 2,304</small></span><strong id="ifmsCost">₹1,15,200</strong></div>
+          <div class="summary-row"><span id="gstLabel">GST · 5%</span><strong id="gstCost">₹14,16,566</strong></div>
+        </div>
+
+        <div class="final-row"><span>Total</span><strong id="grandTotalBottom">₹2,98,63,086</strong></div>
+        <p class="formula-note">GST is calculated on sales consideration (A+B+C). IFMS is added separately, matching the supplied cost sheet.</p>
+      </aside>
+    </div>
+  </main>
+
+  <div class="mobile-total"><span>Final price</span><strong id="mobileTotal">₹2,98,63,086</strong></div>
+  <script src="vendor/html2pdf.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Final Price</string>
+    <string name="title_activity_main">Final Price</string>
+    <string name="package_name">com.ngrealty.finalprice</string>
+    <string name="custom_url_scheme">com.ngrealty.finalprice</string>
+</resources>

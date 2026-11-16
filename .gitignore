@@ -1,0 +1,21 @@
+node_modules/
+tmp/
+output/
+
+# Android/Gradle generated output and machine-specific settings
+.gradle/
+android/.gradle/
+android/local.properties
+android/**/build/
+android/app/src/main/assets/
+android/capacitor-cordova-android-plugins/
+*.apk
+*.aab
+
+# Editor and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+*.log
